@@ -10,9 +10,9 @@ angular.module('StoryboardApp.Storyboard')
             return '_' + Math.random().toString(36).substr(2, 9);
         }
 
-        StoryService.getAll().then(function(response) {
-            ctrl.stories = response.data.stories;
-        });
+        StoryService.get();
+
+        ctrl.stories = StoryService.model;
 
         ctrl.statuses = STORY_STATUSES;
         ctrl.types = STORY_TYPES;

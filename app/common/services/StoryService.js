@@ -3,24 +3,26 @@
 angular.module('StoryboardApp.Common')
     .service('StoryService', ['$log', '$http', 'EndpointService', function ($log, $http, EndpointService) {
         var service = this,
-            modelName = 'stories';
+            modelName = 'stories'
 
         function handleResponse(promise, methodName) {
             return promise.error(function (reason) {
-                    $log.debug(methodName, reason);
-                });
+                $log.debug(methodName, reason);
+            });
         }
+
+        service.model = [];
 
         service.create = function (story) {
             return handleResponse(EndpointService.getUrl(modelName), story, 'create');
         };
 
-        service.getAll = function () {
-            return handleResponse($http.get(EndpointService.getUrl(modelName)), 'getAll');
-        };
-
-        service.getById = function (storyId) {
-            return handleResponse($http.get(EndpointService.getUrlForId(modelName, storyId)), 'getById');
+        service.get = function () {
+            return handleResponse($http.get(EndpointService.getUrl(modelName)), 'get')
+                .success(function(data) {
+                    service.model.length = 0;
+                    Array.prototype.push.apply(service.model, data.stories);
+                });
         };
 
         service.update = function (story) {
