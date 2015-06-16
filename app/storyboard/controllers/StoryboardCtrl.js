@@ -7,16 +7,25 @@ angular.module('StoryboardApp.Storyboard')
 
         ctrl.stories = [
             {
+                id: 1,
                 title: 'Pierwsza historyjka',
                 description: 'Jakiś opis 1',
                 status: 'To do',
-                type: 'Spike'
+                type: 'Spike',
+                reporter: 2,
+                assignee: 1,
+                criteria: 'Kryteria a b i c'
+
             },
             {
+                id: 2,
                 title: 'Druga historyjka',
                 description: 'Jakiś opis 2',
                 status: 'In Progress',
-                type: 'Enhancement'
+                type: 'Enhancement',
+                reporter: 2,
+                assignee: 1,
+                criteria: 'Kryteria a b'
             }
         ];
 
@@ -27,5 +36,30 @@ angular.module('StoryboardApp.Storyboard')
             { name: 'QA review' },
             { name: 'Verified' }
         ];
+
+        ctrl.selectedStory = null;
+        ctrl.editedStory = null;
+
+        ctrl.selectStory = function(story) {
+            ctrl.selectedStory = story;
+            ctrl.editedStory = angular.copy(ctrl.selectedStory);
+        };
+
+        ctrl.deleteStory = function(storyId) {
+            for (var idx = 0; idx < ctrl.stories.length; idx++) {
+                if (ctrl.stories[idx].id === storyId) {
+                    ctrl.stories.splice(idx, 1);
+                    break;
+                }
+            }
+            ctrl.resetForm();
+        };
+
+        ctrl.resetForm = function () {
+            ctrl.currentStory = null;
+            ctrl.editedStory = null;
+            ctrl.detailsForm.$setPristine();
+            ctrl.detailsForm.$setUntouched();
+        };
 
     });

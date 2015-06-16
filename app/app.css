@@ -273,3 +273,7 @@ form.ng-dirty input.ng-valid {
   resize: none;
   margin-bottom: 5px;
 }
+
+.cardDetailsTitle {
+  padding-top: 20px;
+}
