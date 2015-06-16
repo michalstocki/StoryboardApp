@@ -1,32 +1,34 @@
 'use strict';
 
 angular.module('StoryboardApp.Common')
-    .service('StoryService', function () {
-        var service = this;
-        service.stories = [
-            {
-                id: 1,
-                title: 'Pierwsza historyjka',
-                description: 'Jakiś opis 1',
-                status: 'To do',
-                type: 'Spike',
-                reporter: 2,
-                assignee: 1,
-                criteria: 'Kryteria a b i c'
+    .service('StoryService', ['$log', '$http', 'EndpointService', function ($log, $http, EndpointService) {
+        var service = this,
+            modelName = 'stories';
 
-            },
-            {
-                id: 2,
-                title: 'Druga historyjka',
-                description: 'Jakiś opis 2',
-                status: 'In Progress',
-                type: 'Enhancement',
-                reporter: 2,
-                assignee: 1,
-                criteria: 'Kryteria a b'
-            }
-        ];
-        service.getStories = function() {
-            return service.stories;
+        function handleResponse(promise, methodName) {
+            return promise.error(function (reason) {
+                    $log.debug(methodName, reason);
+                });
         }
-    });
+
+        service.create = function (story) {
+            return handleResponse(EndpointService.getUrl(modelName), story, 'create');
+        };
+
+        service.getAll = function () {
+            return handleResponse($http.get(EndpointService.getUrl(modelName)), 'getAll');
+        };
+
+        service.getById = function (storyId) {
+            return handleResponse($http.get(EndpointService.getUrlForId(modelName, storyId)), 'getById');
+        };
+
+        service.update = function (story) {
+            return handleResponse($http.put(EndpointService.getUrlForId(modelName, story.id), story), 'update');
+        };
+
+        service.delete = function (storyId) {
+            return handleResponse($http.delete(EndpointService.getUrlForId(modelName, storyId), story), 'delete');
+        };
+
+    }]);

@@ -40,7 +40,7 @@
                 <label class="control-label" for="inputStatus">*Status</label>
                 <select id="inputStatus" name="inputStatus" class="form-control"
                         ng-model="storyboard.editedStory.status" ng-required="true"
-                        ng-options="story.name as story.name for story in storyboard.statuses">
+                        ng-options="status.name as status.name for status in storyboard.statuses">
                     <option value="">Wybierz status</option>
                 </select>
             </div>
