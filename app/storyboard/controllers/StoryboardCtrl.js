@@ -5,6 +5,10 @@ angular.module('StoryboardApp.Storyboard')
     .controller('StoryboardCtrl', function() {
         var ctrl = this;
 
+        function generateId() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        }
+
         ctrl.stories = [
             {
                 id: 1,
@@ -45,6 +49,25 @@ angular.module('StoryboardApp.Storyboard')
             ctrl.editedStory = angular.copy(ctrl.selectedStory);
         };
 
+        ctrl.createStory = function() {
+            var newStory = angular.copy(ctrl.editedStory);
+            newStory.id = generateId();
+            ctrl.stories.push(newStory);
+            ctrl.resetForm();
+        };
+
+        ctrl.cancelEdit = function () {
+            ctrl.resetForm();
+        };
+
+        ctrl.updateStory = function () {
+            var fields = ['title', 'description', 'criteria', 'status', 'type', 'reporter', 'assignee'];
+            fields.forEach(function (field) {
+                ctrl.selectedStory[field] = ctrl.editedStory[field];
+            });
+            ctrl.resetForm();
+        };
+
         ctrl.deleteStory = function(storyId) {
             for (var idx = 0; idx < ctrl.stories.length; idx++) {
                 if (ctrl.stories[idx].id === storyId) {
@@ -56,10 +79,10 @@ angular.module('StoryboardApp.Storyboard')
         };
 
         ctrl.resetForm = function () {
-            ctrl.currentStory = null;
+            ctrl.selectedStory = null;
             ctrl.editedStory = null;
-            ctrl.detailsForm.$setPristine();
             ctrl.detailsForm.$setUntouched();
+            ctrl.detailsForm.$setPristine();
         };
 
     });
