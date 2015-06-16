@@ -40,7 +40,7 @@
                 <label class="control-label" for="inputStatus">*Status</label>
                 <select id="inputStatus" name="inputStatus" class="form-control"
                         ng-model="storyboard.editedStory.status" ng-required="true"
-                        ng-options="story.name as story.name for story in storyboard.statuses">
+                        ng-options="status.name as status.name for status in storyboard.statuses">
                     <option value="">Wybierz status</option>
                 </select>
             </div>
@@ -48,7 +48,9 @@
         <div class="form-group">
             <div class="controls">
                 <label class="control-label" for="inputType">*Typ</label>
-                <select id="inputType" name="inputType" class="form-control" ng-required="true">
+                <select id="inputType" name="inputType" class="form-control" ng-required="true"
+                        ng-model="storyboard.editedStory.type"
+                        ng-options="type.name as type.name for type in storyboard.types">
                     <option value="">Wybierz typ</option>
                 </select>
             </div>
@@ -88,7 +90,7 @@
             </div>
         </div>
         <hr/>
-        <div ng-if="storyboard.selectedStory">
+        <div ng-show="storyboard.selectedStory">
             <button class="btn btn-default" ng-click="storyboard.cancelEdit()" type="reset">
                 Anuluj
             </button>
@@ -98,7 +100,7 @@
                 Aktualizuj
             </button>
         </div>
-        <div ng-if="!storyboard.selectedStory">
+        <div ng-show="!storyboard.selectedStory">
             <button class="btn btn-default"
                     ng-disabled="!storyboard.detailsForm.$valid"
                     ng-click="storyboard.createStory()">Utwórz
