@@ -2,6 +2,7 @@
 
 angular.module('StoryboardApp', [
     'ngRoute',
+    'StoryboardApp.Common',
     'StoryboardApp.Storyboard'
 ])
     .config(['$routeProvider', function ($routeProvider) {

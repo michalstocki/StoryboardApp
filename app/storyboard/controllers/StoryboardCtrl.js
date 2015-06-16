@@ -2,44 +2,18 @@
 
 angular.module('StoryboardApp.Storyboard')
 
-    .controller('StoryboardCtrl', function() {
+    .controller('StoryboardCtrl', ['StoryService', 'STORY_STATUSES', 'STORY_TYPES',
+        function(StoryService, STORY_STATUSES, STORY_TYPES) {
         var ctrl = this;
 
         function generateId() {
             return '_' + Math.random().toString(36).substr(2, 9);
         }
 
-        ctrl.stories = [
-            {
-                id: 1,
-                title: 'Pierwsza historyjka',
-                description: 'Jakiś opis 1',
-                status: 'To do',
-                type: 'Spike',
-                reporter: 2,
-                assignee: 1,
-                criteria: 'Kryteria a b i c'
+        ctrl.stories = StoryService.getStories();
 
-            },
-            {
-                id: 2,
-                title: 'Druga historyjka',
-                description: 'Jakiś opis 2',
-                status: 'In Progress',
-                type: 'Enhancement',
-                reporter: 2,
-                assignee: 1,
-                criteria: 'Kryteria a b'
-            }
-        ];
-
-        ctrl.statuses = [
-            { name: 'To do' },
-            { name: 'In progress' },
-            { name: 'Code review' },
-            { name: 'QA review' },
-            { name: 'Verified' }
-        ];
+        ctrl.statuses = STORY_STATUSES;
+        ctrl.types = STORY_TYPES;
 
         ctrl.selectedStory = null;
         ctrl.editedStory = null;
@@ -85,4 +59,4 @@ angular.module('StoryboardApp.Storyboard')
             ctrl.detailsForm.$setPristine();
         };
 
-    });
+    }]);
