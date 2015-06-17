@@ -41,11 +41,22 @@
         <form name="storyboard.detailsForm" novalidate="">
             <div class="form-group">
                 <div class="controls">
-                    <label class="control-label" for="inputTitle">*Tytuł</label>
-                    <input id="inputTitle" type="text" name="inputTitle"
+                    <label class="control-label" for="title">*Tytuł</label>
+                    <input id="title" type="text" name="title"
                            placeholder="Tytuł historyjki" class="form-control"
                            ng-model="storyboard.editedStory.title"
                            ng-required="true" ng-minlength="3" ng-maxlength="15"/>
+                    <div ng-messages="storyboard.detailsForm.title.$error">
+                        <div ng-message="required">
+                            Pole jest Wymagane
+                        </div>
+                        <div ng-message="minlength">
+                            Pole jest za krtótkie
+                        </div>
+                        <div ng-message="maxlength">
+                            Pole jest za długie
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
