@@ -4,7 +4,7 @@
             ng-repeat="status in storyboard.statuses">
             <h3 class="status">{{ status.name }}</h3>
             <hr/>
-            <li class="story" story="story" active
+            <li class="story rotation-animation" story="story" active
                 drag-container="story" mime-type="application/x-story-status"
                 drop-container="" accepts="['application/x-story-status']"
                 ng-repeat="story in storyboard.stories | filter: {status: status.name}"
