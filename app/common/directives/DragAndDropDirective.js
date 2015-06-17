@@ -248,7 +248,7 @@ angular.module('StoryboardApp.Common')
 
             var eventData = dropContainer.updateDragTarget(e);
 
-            dropContainer.el.children().css({'pointer-events': 'none'});
+            //dropContainer.el.children().css({'pointer-events': 'none'});
             dropContainer.el.addClass('drop-container-active');
 
             if (dropContainer.callbacks.onDragEnter) {
