@@ -5,7 +5,15 @@
             <h3 class="status">{{ status.name }}</h3>
             <hr/>
             <li class="story" story="story" ng-repeat="story in storyboard.stories | filter: {status: status.name}"
-                ng-click="storyboard.selectStory(story)"></li>
+                ng-click="storyboard.selectStory(story)"
+                drag-container="story" mime-type="application/x-story-status"
+                drop-container="" accepts="['application/x-story-status']">
+                <div drop-target="top"
+                     on-drag-enter="storyboard.insertStory(story, data, true)"
+                     on-drop="storyboard.finalizeDrop(data)"></div>
+                <div drop-target="bottom"
+                     on-drag-enter="storyboard.insertStory(story, data, false)"
+                     on-drop="storyboard.finalizeDrop(data)"></div></li>
             <li class="emptystatus"
                 drop-container="" accepts="['application/x-story-status']"
                 on-drop="storyboard.finalizeDrop(data)"

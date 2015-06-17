@@ -7,10 +7,7 @@ angular.module('StoryboardApp.Storyboard')
             restrict: 'A',
             templateUrl: 'storyboard/tpl/story.html',
             scope: {
-                story: '='
-            },
-            controller: function() {
-
+                storyModel: '=story'
             }
         }
     });
