@@ -41,12 +41,12 @@
         <form name="storyboard.detailsForm" novalidate="">
             <div class="form-group">
                 <div class="controls">
-                    <label class="control-label" for="title">*Tytuł</label>
-                    <input id="title" type="text" name="title"
+                    <label class="control-label" for="inputTitle">*Tytuł</label>
+                    <input id="inputTitle" type="text" name="inputTitle"
                            placeholder="Tytuł historyjki" class="form-control"
                            ng-model="storyboard.editedStory.title"
                            ng-required="true" ng-minlength="3" ng-maxlength="15"/>
-                    <div ng-messages="storyboard.detailsForm.title.$error">
+                    <div ng-show="storyboard.detailsForm.inputTitle.$dirty" ng-messages="storyboard.detailsForm.inputTitle.$error">
                         <div ng-message="required">
                             Pole jest Wymagane
                         </div>
@@ -82,7 +82,7 @@
             <div class="form-group">
                 <div class="controls">
                     <label class="control-label" for="inputDescription">Opis</label>
-                <textarea id="inputDescription" name="inputTitle" rows="4"
+                <textarea id="inputDescription" name="inputDescription" rows="4"
                           placeholder="Opis" class="form-control"
                           ng-model="storyboard.editedStory.description">
                 </textarea>
@@ -99,7 +99,7 @@
             </div>
             <div class="form-group">
                 <div class="controls">
-                    <label class="control-label" for="inputType">*Raportujący</label>
+                    <label class="control-label" for="inputReporter">*Raportujący</label>
                     <select id="inputReporter" name="inputReporter" class="form-control" ng-required="true">
                         <option value="">Wybierz...</option>
                     </select>
@@ -107,8 +107,8 @@
             </div>
             <div class="form-group">
                 <div class="controls">
-                    <label class="control-label" for="inputType">*Wykonujący</label>
-                    <select id="inputAssignee" name="inputAsignee" class="form-control" ng-required="true">
+                    <label class="control-label" for="inputAssignee">*Wykonujący</label>
+                    <select id="inputAssignee" name="inputAssignee" class="form-control" ng-required="true">
                         <option value="">Wybierz...</option>
                     </select>
                 </div>
