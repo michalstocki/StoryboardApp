@@ -2,15 +2,15 @@
 
 angular.module('StoryboardApp.Common')
 
-    .directive('active', function () {
+    .directive('active', function() {
         return {
-            restrict: 'A',
+            restrict : 'A',
             link: function(scope, element, attrs) {
                 element.mouseenter(function() {
-                    element.finish().fadeTo('slow', 0.7);
+                    element.finish().fadeTo('normal', 0.9);
                 }).mouseleave(function() {
-                    element.finish().css('slow', 1);
+                    element.finish().fadeTo('normal', 1);
                 });
             }
-        }
+        };
     });
