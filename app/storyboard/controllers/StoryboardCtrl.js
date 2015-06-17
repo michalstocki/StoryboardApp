@@ -15,6 +15,8 @@ angular.module('StoryboardApp.Storyboard')
             ctrl.deleteStory(story.id);
         });
 
+        ctrl.detailsVisible = true;
+
         ctrl.stories = StoryService.model;
 
         ctrl.statuses = STORY_STATUSES;

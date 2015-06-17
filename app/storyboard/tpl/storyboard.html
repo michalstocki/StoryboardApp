@@ -28,91 +28,100 @@
 </div>
 
 <div class="details">
-    <h3 class="cardDetailsTitle">Szczegóły karty</h3>
-    <form name="storyboard.detailsForm" novalidate="">
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputTitle">*Tytuł</label>
-                <input id="inputTitle" type="text" name="inputTitle"
-                       placeholder="Tytuł historyjki" class="form-control"
-                       ng-model="storyboard.editedStory.title"
-                       ng-required="true" ng-minlength="3" ng-maxlength="15"/>
+    <div class="details-nav">
+        <button class="btn pull-left btn-default"
+                ng-click="storyboard.detailsVisible = !storyboard.detailsVisible">
+            <span class="glyphicon"
+                  ng-class="storyboard.detailsVisible ? 'glyphicon-arrow-left' : 'glyphicon-arrow-right'"></span>
+        </button>
+    </div>
+    <div class="fade-transition" ng-if="storyboard.detailsVisible">
+        <h3 class="cardDetailsTitle">Szczegóły karty</h3>
+
+        <form name="storyboard.detailsForm" novalidate="">
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputTitle">*Tytuł</label>
+                    <input id="inputTitle" type="text" name="inputTitle"
+                           placeholder="Tytuł historyjki" class="form-control"
+                           ng-model="storyboard.editedStory.title"
+                           ng-required="true" ng-minlength="3" ng-maxlength="15"/>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputStatus">*Status</label>
-                <select id="inputStatus" name="inputStatus" class="form-control"
-                        ng-model="storyboard.editedStory.status" ng-required="true"
-                        ng-options="status.name as status.name for status in storyboard.statuses">
-                    <option value="">Wybierz status</option>
-                </select>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputStatus">*Status</label>
+                    <select id="inputStatus" name="inputStatus" class="form-control"
+                            ng-model="storyboard.editedStory.status" ng-required="true"
+                            ng-options="status.name as status.name for status in storyboard.statuses">
+                        <option value="">Wybierz status</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputType">*Typ</label>
-                <select id="inputType" name="inputType" class="form-control" ng-required="true"
-                        ng-model="storyboard.editedStory.type"
-                        ng-options="type.name as type.name for type in storyboard.types">
-                    <option value="">Wybierz typ</option>
-                </select>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputType">*Typ</label>
+                    <select id="inputType" name="inputType" class="form-control" ng-required="true"
+                            ng-model="storyboard.editedStory.type"
+                            ng-options="type.name as type.name for type in storyboard.types">
+                        <option value="">Wybierz typ</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputDescription">Opis</label>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputDescription">Opis</label>
                 <textarea id="inputDescription" name="inputTitle" rows="4"
-                       placeholder="Opis" class="form-control"
-                       ng-model="storyboard.editedStory.description">
+                          placeholder="Opis" class="form-control"
+                          ng-model="storyboard.editedStory.description">
                 </textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputCriteria">Kryteria akceptacji</label>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputCriteria">Kryteria akceptacji</label>
                 <textarea id="inputCriteria" name="inputCriteria" rows="4"
                           placeholder="Kryteria akceptacji" class="form-control"
                           ng-model="storyboard.editedStory.criteria">
                 </textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputType">*Raportujący</label>
-                <select id="inputReporter" name="inputReporter" class="form-control" ng-required="true">
-                    <option value="">Wybierz...</option>
-                </select>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputType">*Raportujący</label>
+                    <select id="inputReporter" name="inputReporter" class="form-control" ng-required="true">
+                        <option value="">Wybierz...</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <label class="control-label" for="inputType">*Wykonujący</label>
-                <select id="inputAssignee" name="inputAsignee" class="form-control" ng-required="true">
-                    <option value="">Wybierz...</option>
-                </select>
+            <div class="form-group">
+                <div class="controls">
+                    <label class="control-label" for="inputType">*Wykonujący</label>
+                    <select id="inputAssignee" name="inputAsignee" class="form-control" ng-required="true">
+                        <option value="">Wybierz...</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <hr/>
-        <div ng-show="storyboard.selectedStory">
-            <button class="btn btn-default" ng-click="storyboard.cancelEdit()" type="reset">
-                Anuluj
-            </button>
-            <button class="btn btn-primary"
-                    ng-disabled="!storyboard.detailsForm.$valid"
-                    ng-click="storyboard.updateStory()">
-                Aktualizuj
-            </button>
-        </div>
-        <div ng-show="!storyboard.selectedStory">
-            <button class="btn btn-default"
-                    ng-disabled="!storyboard.detailsForm.$valid"
-                    ng-click="storyboard.createStory()">Utwórz
-            </button>
-        </div>
-    </form>
+            <hr/>
+            <div ng-show="storyboard.selectedStory">
+                <button class="btn btn-default" ng-click="storyboard.cancelEdit()" type="reset">
+                    Anuluj
+                </button>
+                <button class="btn btn-primary"
+                        ng-disabled="!storyboard.detailsForm.$valid"
+                        ng-click="storyboard.updateStory()">
+                    Aktualizuj
+                </button>
+            </div>
+            <div ng-show="!storyboard.selectedStory">
+                <button class="btn btn-default"
+                        ng-disabled="!storyboard.detailsForm.$valid"
+                        ng-click="storyboard.createStory()">Utwórz
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-
 
 
 

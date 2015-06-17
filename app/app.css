@@ -281,3 +281,23 @@ form.ng-dirty input.ng-valid {
 .emptystatus {
   min-height: 100vh;
 }
+
+.fade-transition.ng-enter, .fade-transition.ng-leave {
+  transition: 2s linear all;
+}
+
+.fade-transition.ng-enter {
+  opacity: 0;
+}
+
+.fade-transition.ng-enter-active {
+  opacity: 1;
+}
+
+.fade-transition.ng-leave {
+  opacity: 1;
+}
+
+.fade-transition.ng-leave-active {
+  opacity: 0;
+}
