@@ -1,0 +1,23 @@
+<div class="story-wrapper"
+     drag-container="story" mime-type="application/x-story-status"
+     drop-container="" accepts="['application/x-story-status']"
+     >
+    <div drop-target="top"
+         on-drag-enter="storyboard.insertStory(story, data, true)"
+         on-drop="storyboard.finalizeDrop(data)"></div>
+    <div drop-target="bottom"
+         on-drag-enter="storyboard.insertStory(story, data, false)"
+         on-drop="storyboard.finalizeDrop(data)"></div>
+    <article>
+        <div>
+            <button type="button" class="close"
+                    ng-click="storyboard.deleteStory(story.id)">x
+            </button>
+            <p class="title">{{ story.title }}</p>
+        </div>
+        <div class="type-bar {{ story.type }}"></div>
+        <div>
+            <p>{{ story.description }}</p>
+        </div>
+    </article>
+</div>

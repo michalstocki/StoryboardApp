@@ -4,29 +4,8 @@
             ng-repeat="status in storyboard.statuses">
             <h3 class="status">{{ status.name }}</h3>
             <hr/>
-            <li class="story"
-                drag-container="story" mime-type="application/x-story-status"
-                drop-container="" accepts="['application/x-story-status']"
-                ng-repeat="story in storyboard.stories | filter: {status: status.name}"
-                ng-click="storyboard.selectStory(story)">
-                <div drop-target="top"
-                     on-drag-enter="storyboard.insertStory(story, data, true)"
-                     on-drop="storyboard.finalizeDrop(data)"/>
-                <div drop-target="bottom"
-                     on-drag-enter="storyboard.insertStory(story, data, false)"
-                     on-drop="storyboard.finalizeDrop(data)"/>
-                <article>
-                    <div>
-                        <button type="button" class="close"
-                                ng-click="storyboard.deleteStory(story.id)">x</button>
-                        <p class="title">{{ story.title }}</p>
-                    </div>
-                    <div class="type-bar {{ story.type }}"></div>
-                    <div>
-                        <p>{{ story.description }}</p>
-                    </div>
-                </article>
-            </li>
+            <li class="story" story="story" ng-repeat="story in storyboard.stories | filter: {status: status.name}"
+                ng-click="storyboard.selectStory(story)"></li>
             <li class="emptystatus"
                 drop-container="" accepts="['application/x-story-status']"
                 on-drop="storyboard.finalizeDrop(data)"
