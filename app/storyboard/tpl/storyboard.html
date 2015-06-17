@@ -5,6 +5,7 @@
             <h3 class="status">{{ status.name }}</h3>
             <hr/>
             <li class="story"
+                active
                 drag-container="story" mime-type="application/x-story-status"
                 drop-container="" accepts="['application/x-story-status']"
                 ng-repeat="story in storyboard.stories | filter: {status: status.name}"
