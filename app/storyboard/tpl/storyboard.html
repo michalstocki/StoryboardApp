@@ -27,15 +27,15 @@
     </div>
 </div>
 
-<div class="details">
+<div class="details slide-animation" ng-class="{'show-details': storyboard.detailsVisible}">
     <div class="details-nav">
         <button class="btn pull-left btn-default"
                 ng-click="storyboard.detailsVisible = !storyboard.detailsVisible">
             <span class="glyphicon"
-                  ng-class="storyboard.detailsVisible ? 'glyphicon-arrow-left' : 'glyphicon-arrow-right'"></span>
+                  ng-class="storyboard.detailsVisible ? 'glyphicon-arrow-right' : 'glyphicon-arrow-left'"></span>
         </button>
     </div>
-    <div class="fade-transition" ng-if="storyboard.detailsVisible">
+    <div class="fade-transition" ng-show="storyboard.detailsVisible">
         <h3 class="cardDetailsTitle">Szczegóły karty</h3>
 
         <form name="storyboard.detailsForm" novalidate="">
