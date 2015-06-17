@@ -2,8 +2,8 @@
 
 angular.module('StoryboardApp.Storyboard')
 
-    .controller('StoryboardCtrl', ['StoryService', 'STORY_STATUSES', 'STORY_TYPES',
-        function(StoryService, STORY_STATUSES, STORY_TYPES) {
+    .controller('StoryboardCtrl', ['$rootScope', 'StoryService', 'STORY_STATUSES', 'STORY_TYPES',
+        function($rootScope, StoryService, STORY_STATUSES, STORY_TYPES) {
         var ctrl = this;
 
         function generateId() {
@@ -11,6 +11,9 @@ angular.module('StoryboardApp.Storyboard')
         }
 
         StoryService.get();
+        $rootScope.$on('story-delete-click', function (event, story) {
+            ctrl.deleteStory(story.id);
+        });
 
         ctrl.stories = StoryService.model;
 
