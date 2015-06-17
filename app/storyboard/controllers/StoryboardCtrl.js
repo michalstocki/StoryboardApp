@@ -61,4 +61,37 @@ angular.module('StoryboardApp.Storyboard')
             ctrl.detailsForm.$setPristine();
         };
 
+        ctrl.finalizeDrop = function(story) {
+            console.log(story);
+            // update na modelu
+        };
+
+        ctrl.insertStory = function(targetStory, sourceStory, insertBefore) {
+            var sourceIdx, targetIdx;
+
+            if (targetStory === sourceStory) {
+                return;
+            }
+
+            sourceIdx = ctrl.stories.indexOf(sourceStory);
+            targetIdx = ctrl.stories.indexOf(targetStory);
+
+            if (!insertBefore) {
+                targetIdx++;
+            }
+
+            if (sourceIdx >=0 && targetIdx >= 0) {
+                ctrl.stories.splice(sourceIdx, 1);
+                if (targetIdx >= sourceIdx) {
+                    targetIdx--;
+                }
+                ctrl.stories.splice(targetIdx, 0, sourceStory);
+                sourceStory.status = targetStory.status;
+            }
+        };
+
+        ctrl.changeStoryStatus = function(story, status) {
+                story.status = status.name;
+        };
+
     }]);
